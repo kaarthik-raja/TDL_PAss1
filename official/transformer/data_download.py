@@ -42,12 +42,6 @@ from official.utils.flags import core as flags_core
 # that generates a vocabulary set that is closest in size to _TARGET_VOCAB_SIZE.
 _TRAIN_DATA_SOURCES = [
     {
-        "url": "http://data.statmt.org/wmt17/translation-task/"
-               "training-parallel-nc-v12.tgz",
-        "input": "news-commentary-v12.de-en.en",
-        "target": "news-commentary-v12.de-en.de",
-    },
-    {
         "url": "http://www.statmt.org/wmt13/training-parallel-commoncrawl.tgz",
         "input": "commoncrawl.de-en.en",
         "target": "commoncrawl.de-en.de",
@@ -79,7 +73,7 @@ _TEST_DATA_SOURCES = [
 ]
 
 # Vocabulary constants
-_TARGET_VOCAB_SIZE = 32768  # Number of subtokens in the vocabulary list.
+_TARGET_VOCAB_SIZE = 30000  # Number of subtokens in the vocabulary list.
 _TARGET_THRESHOLD = 327  # Accept vocabulary if size is within this threshold
 VOCAB_FILE = "vocab.ende.%d" % _TARGET_VOCAB_SIZE
 
@@ -90,7 +84,7 @@ _EVAL_TAG = "dev"  # Following WMT and Tensor2Tensor conventions, in which the
                    # evaluation datasets are tagged as "dev" for development.
 
 # Number of files to split train and evaluation data
-_TRAIN_SHARDS = 100
+_TRAIN_SHARDS = 50
 _EVAL_SHARDS = 1
 
 
@@ -376,14 +370,10 @@ def main(unused_argv):
   make_dir(FLAGS.raw_dir)
   make_dir(FLAGS.data_dir)
 
-  # Download test_data
-  tf.logging.info("Step 1/5: Downloading test data")
-  train_files = get_raw_files(FLAGS.data_dir, _TEST_DATA_SOURCES)
-
-  # Get paths of download/extracted training and evaluation files.
-  tf.logging.info("Step 2/5: Downloading data from source")
-  train_files = get_raw_files(FLAGS.raw_dir, _TRAIN_DATA_SOURCES)
-  eval_files = get_raw_files(FLAGS.raw_dir, _EVAL_DATA_SOURCES)
+  train_files={'inputs': ['/content/drive/My Drive/Colab Notebooks/dataset/train1.en'], 
+	'targets': ['/content/drive/My Drive/Colab Notebooks/dataset/train1.de']}
+  eval_files={'inputs': ['/content/drive/My Drive/Colab Notebooks/dataset/validation.en'], 
+			'targets': ['/content/drive/My Drive/Colab Notebooks/dataset/validation.en']}
 
   # Create subtokenizer based on the training files.
   tf.logging.info("Step 3/5: Creating subtokenizer and building vocabulary")
