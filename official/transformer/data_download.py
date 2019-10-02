@@ -373,31 +373,31 @@ def main(unused_argv):
   train_files={'inputs': ['/content/drive/My Drive/Colab Notebooks/dataset/train1.en'], 
 	'targets': ['/content/drive/My Drive/Colab Notebooks/dataset/train1.de']}
   eval_files={'inputs': ['/content/drive/My Drive/Colab Notebooks/dataset/validation.en'], 
-			'targets': ['/content/drive/My Drive/Colab Notebooks/dataset/validation.en']}
+			'targets': ['/content/drive/My Drive/Colab Notebooks/dataset/validation.de']}
 
   # Create subtokenizer based on the training files.
   tf.logging.info("Step 3/5: Creating subtokenizer and building vocabulary")
   train_files_flat = train_files["inputs"] + train_files["targets"]
   vocab_file = os.path.join(FLAGS.data_dir, VOCAB_FILE)
-  subtokenizer = tokenizer.Subtokenizer.init_from_files(
-      vocab_file, train_files_flat, _TARGET_VOCAB_SIZE, _TARGET_THRESHOLD,
-      min_count=None if FLAGS.search else _TRAIN_DATA_MIN_COUNT)
+  # subtokenizer = tokenizer.Subtokenizer.init_from_files(
+  #     vocab_file, train_files_flat, _TARGET_VOCAB_SIZE, _TARGET_THRESHOLD,
+  #     min_count=None if FLAGS.search else _TRAIN_DATA_MIN_COUNT)
 
   tf.logging.info("Step 4/5: Compiling training and evaluation data")
-  compiled_train_files = compile_files(FLAGS.raw_dir, train_files, _TRAIN_TAG)
+  # compiled_train_files = compile_files(FLAGS.raw_dir, train_files, _TRAIN_TAG)
   compiled_eval_files = compile_files(FLAGS.raw_dir, eval_files, _EVAL_TAG)
 
   # Tokenize and save data as Examples in the TFRecord format.
   tf.logging.info("Step 5/5: Preprocessing and saving data")
-  train_tfrecord_files = encode_and_save_files(
-      subtokenizer, FLAGS.data_dir, compiled_train_files, _TRAIN_TAG,
-      _TRAIN_SHARDS)
+  # train_tfrecord_files = encode_and_save_files(
+  #     subtokenizer, FLAGS.data_dir, compiled_train_files, _TRAIN_TAG,
+  #     _TRAIN_SHARDS)
   encode_and_save_files(
       subtokenizer, FLAGS.data_dir, compiled_eval_files, _EVAL_TAG,
       _EVAL_SHARDS)
 
-  for fname in train_tfrecord_files:
-    shuffle_records(fname)
+  # for fname in train_tfrecord_files:
+  #   shuffle_records(fname)
 
 
 def define_data_download_flags():
