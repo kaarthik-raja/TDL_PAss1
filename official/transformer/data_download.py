@@ -384,14 +384,14 @@ def main(unused_argv):
       min_count=None if FLAGS.search else _TRAIN_DATA_MIN_COUNT)
 
   tf.logging.info("Step 4/5: Compiling training and evaluation data")
-  # compiled_train_files = compile_files(FLAGS.raw_dir, train_files, _TRAIN_TAG)
+  compiled_train_files = compile_files(FLAGS.raw_dir, train_files, _TRAIN_TAG)
   compiled_eval_files = compile_files(FLAGS.raw_dir, eval_files, _EVAL_TAG)
 
   # Tokenize and save data as Examples in the TFRecord format.
   tf.logging.info("Step 5/5: Preprocessing and saving data")
-  # train_tfrecord_files = encode_and_save_files(
-  #     subtokenizer, FLAGS.data_dir, compiled_train_files, _TRAIN_TAG,
-  #     _TRAIN_SHARDS)
+  train_tfrecord_files = encode_and_save_files(
+      subtokenizer, FLAGS.data_dir, compiled_train_files, _TRAIN_TAG,
+      _TRAIN_SHARDS)
   encode_and_save_files(
       subtokenizer, FLAGS.data_dir, compiled_eval_files, _EVAL_TAG,
       _EVAL_SHARDS)
