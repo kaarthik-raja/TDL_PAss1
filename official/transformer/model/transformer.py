@@ -126,7 +126,8 @@ class Transformer(object):
 				encoder_inputs = tf.nn.dropout(
 						encoder_inputs, 1 - self.params["layer_postprocess_dropout"])
 
-			return self.encoder_stack(encoder_inputs, attention_bias, inputs_padding)
+			enc,att = self.encoder_stack(encoder_inputs, attention_bias, inputs_padding)
+			return enc,att
 
 	def decode(self, targets, encoder_outputs, attention_bias):
 		"""Generate logits for each value in the target sequence.
