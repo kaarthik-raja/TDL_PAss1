@@ -303,7 +303,7 @@ class EncoderStack(tf.layers.Layer):
 		super(EncoderStack, self).__init__()
 		self.layers = []
 		self.Awts = {}
-		for _ in range(params["num_hidden_layers"]):
+		for n in range(params["num_hidden_layers"]):
 			# Create sublayers for each layer.
 			self_attention_layer  = attention_layer.SelfAttention(
 					params["hidden_size"], params["num_heads"],
@@ -361,7 +361,7 @@ class DecoderStack(tf.layers.Layer):
 		super(DecoderStack, self).__init__()
 		self.layers = []
 		self.Awts = {}
-		for _ in range(params["num_hidden_layers"]):
+		for n in range(params["num_hidden_layers"]):
 			self_attention_layer = attention_layer.SelfAttention(
 					params["hidden_size"], params["num_heads"],
 					params["attention_dropout"], train)
