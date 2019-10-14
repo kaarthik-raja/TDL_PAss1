@@ -303,7 +303,7 @@ class EncoderStack(tf.layers.Layer):
 		super(EncoderStack, self).__init__()
 		self.layers = []
 		self.Awts = {}
-		for n in range(params["num_hidden_layers"]):
+		for _ in range(params["num_hidden_layers"]):
 			# Create sublayers for each layer.
 			self_attention_layer  = attention_layer.SelfAttention(
 					params["hidden_size"], params["num_heads"],
@@ -311,7 +311,7 @@ class EncoderStack(tf.layers.Layer):
 			feed_forward_network = ffn_layer.FeedFowardNetwork(
 					params["hidden_size"], params["filter_size"],
 					params["relu_dropout"], train, params["allow_ffn_pad"])
-			self.Awts["ESAL_%d"%n]=None
+			# self.Awts={}
 			self.layers.append([
 					PrePostProcessingWrapper(self_attention_layer, params, train),
 					PrePostProcessingWrapper(feed_forward_network, params, train)])
@@ -361,7 +361,7 @@ class DecoderStack(tf.layers.Layer):
 		super(DecoderStack, self).__init__()
 		self.layers = []
 		self.Awts = {}
-		for n in range(params["num_hidden_layers"]):
+		for _ in range(params["num_hidden_layers"]):
 			self_attention_layer = attention_layer.SelfAttention(
 					params["hidden_size"], params["num_heads"],
 					params["attention_dropout"], train)
@@ -371,8 +371,8 @@ class DecoderStack(tf.layers.Layer):
 			feed_forward_network = ffn_layer.FeedFowardNetwork(
 					params["hidden_size"], params["filter_size"],
 					params["relu_dropout"], train, params["allow_ffn_pad"])
-			self.Awts["DSAL_%d"%n]=None
-			self.Awts["DCAL_%d"%n]=None
+			# self.Awts["DSAL_%d"%n]=None
+			# self.Awts["DCAL_%d"%n]=None
 
 			self.layers.append([
 					PrePostProcessingWrapper(self_attention_layer, params, train),
