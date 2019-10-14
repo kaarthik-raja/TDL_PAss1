@@ -149,7 +149,7 @@ def translate_text(estimator, subtokenizer, txt):
   translation = next(predictions)["logits"]["outputs"]
   translation = _trim_and_decode(translation, subtokenizer)
   tf.logging.info("Translation of \"%s\": \"%s\"" % (txt, translation))
-  print(predictions["Atwts"].shape)
+  print(predictions["Atwts"].shape,"----------------------\n\n\n")
 
 def main(unused_argv):
   from official.transformer import transformer_main
