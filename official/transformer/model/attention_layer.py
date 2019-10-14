@@ -138,7 +138,7 @@ class Attention(tf.layers.Layer):
 
     # Run the combined outputs through another linear projection layer.
     attention_output = self.output_dense_layer(attention_output)
-    return attention_output
+    return attention_output ,weights
 
 
 class SelfAttention(Attention):

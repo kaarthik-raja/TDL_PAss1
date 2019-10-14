@@ -22,15 +22,15 @@ BASE_PARAMS = defaultdict(
 
     # Input params
     default_batch_size=2048,  # Maximum number of tokens per batch of examples.
-    default_batch_size_tpu=32768,
+    default_batch_size_tpu=30000,
     max_length=256,  # Maximum number of tokens per example.
 
     # Model params
     initializer_gain=1.0,  # Used in trainable variable initialization.
-    vocab_size=33708,  # Number of tokens defined in the vocabulary file.
+    vocab_size=30000,  # Number of tokens defined in the vocabulary file.
     hidden_size=512,  # Model dimension in the hidden layers.
-    num_hidden_layers=6,  # Number of layers in the encoder and decoder stacks.
-    num_heads=8,  # Number of heads to use in multi-headed attention.
+    num_hidden_layers=2,  # Number of layers in the encoder and decoder stacks.
+    num_heads=4,  # Number of heads to use in multi-headed attention.
     filter_size=2048,  # Inner layer dimension in the feedforward network.
 
     # Dropout values (only used when training)
